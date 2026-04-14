@@ -1,0 +1,154 @@
+# AI Agent Log - Lab 1: Ocjenjivanja Trgovina
+
+## Datum: ožujak 2026.
+## Alat: GitHub Copilot (Visual Studio Code + Visual Studio Community)
+
+---
+
+## 1. INICIJALIZACIJA PROJEKTA
+
+**Korak 1.1**: Analiza Lab-1.md dokumneta za razumijevanje zahtjeva
+- Čitaj: 7+ klasa, 4 kompleksne klase (5+ svojstava)
+- Čitaj: Vlastiti enum, DateTime svojstva, veze 1-N i N-N
+- Čitaj: Inicijalizacija 3+ glavnih objekata
+- Čitaj: LINQ upiti i async-await koncept
+
+**Korak 1.2**: Analiza postojeće strukture projekta
+- `OcjenjivanjeTrgovina` je ASP.NET projekt (.NET 10)
+- Postojeći template sadrži: Program.cs, WeatherForecast klasa, Controller
+- Trebalo je obrisati template i kreirati nov objektni model
+
+---
+
+## 2. KREIIRANJE OBJEKTNOG MODELA
+
+**Korak 2.1**: Kreiravanje Enum klase
+- Kreirana: `OcjeneEnum.cs` s 5 vrijednosti
+  - KvalitetaProizvoda
+  - UslugaKorisnika
+  - CjenovnikKompetitivnost
+  - Čistoća
+  - Dostupnost
+
+**Korak 2.2**: Kreiravanje glavnih klasa (8 klasa)
+
+| Klasa | Svojstva | Tip | Napomena |
+|-------|----------|-----|----------|
+| Korisnik | 6 | Kompleksna | Veze: Ocjene, Kupnje |
+| Kategorija | 3 | Jednostavna | Veza: Proizvodi |
+| Trgovina | 7 | Kompleksna | Veze: Ocjene, Proizvodi, Kupnje |
+| Proizvod | 7 | Kompleksna | Veze: Trgovina, Kategorija, KupnjeProizvoda |
+| Ocjena | 7 | Kompleksna | Veze: Korisnik, Trgovina + Enum |
+| Kupnja | 6 | Kompleksna | Veze: Korisnik, Trgovina, StavkeKupnje |
+| KupnjaProizvod | 4 | Veza N-N | Veze: Kupnja, Proizvod |
+| OcjeneEnum | N/A | Enum | 5 vrijednosti |
+
+**AI Agent Pitanja**:
+- "Kako strukturirati klase za veze 1-N?"
+- "Trebam li inicijalizirati List u konstruktoru?"
+- "Koja je razlika između polja i svojstava?"
+
+**AI Agent Odgovori**:
+- Koristi public List<T> za veze 1-N
+- Inicijalizacija u konstruktoru sprječava NullReferenceException
+- Svojstva koriste get/set, polja su samo varijable
+- Privatna polja + javna svojstva je best practice
+
+---
+
+## 3. INICIJALIZACIJA PODATAKA
+
+**Korak 3.1**: Kreiranje test podataka u Program.cs
+
+- **Kategorije**: 3 kategorije (Prehrambeni, Elektronika, Odjeća)
+- **Korisnici**: 3 korisnika (Marko, Ana, Petar) s DateTime svojstvima
+- **Trgovine**: 3 trgovine s lokacijama i datumima otvaranja
+- **Proizvodi**: 5 proizvoda u različitim kategorijama
+- **Ocjene**: 4 ocjene s raznim vrijednostima i enum tipima
+- **Kupnje**: 3 kupnje s detaljnim stavkama
+- **KupnjaProizvod**: 4 stavke s količinama i cijenama
+
+**Sve veze su ručno popunjene** putem AddRange() i Add() metoda.
+
+---
+
+## 4. LINQ UPITI
+
+**Korak 4.1**: Implementacija 8 LINQ upita
+
+Svi upiti su demonstrativni s različitim LINQ operacijama:
+1. OrderByDescending - sortiranje
+2. Where - filtriranje
+3. Where + OrderByDescending - kombiniranje
+4. Where + AddRange - filtriranje preko više kolekcija
+5. Where sa enum filterom - filtriranje po enum vrijednosti
+6. Average() - agregacija
+7. FirstOrDefault() - dohvaćanje jedinog elementa
+8. Count svojstvo - brojanje
+
+**AI Agent Pitanja**:
+- "Koja je razlika između First() i FirstOrDefault()?"
+- "Mogu li kombinirati više LINQ operacija?"
+- "Kako filtrirati po Enum vrijednosti?"
+
+---
+
+## 5. ASYNC/AWAIT IMPLEMENTACIJA
+
+**Korak 5.1**: Kreiranje TrgovanjeService.cs s async metodama
+
+Kreiranih 7 async metoda koje simuliraju učitavanje iz "baze":
+- DohvatiTrgoveAsync
+- DohvatiProizvodeTrgoveAsync
+- DohvatiSveOcjeneAsync
+- DohvatiKupnjeKorisnikaAsync
+- IzracunajProsjecnuOcjenuAsync
+- DohvatiProizvodeSvihTrgoveAsync (s Task.WhenAll)
+- IzracunajUkupanIznosKupnjeAsync
+
+---
+
+## 6. FINALNI REZULTATI
+
+✅ **8 klasa** s objektnim modelom
+✅ **4 kompleksne klase** sa 5+ svojstava
+✅ **Vlastiti enum** - OcjeneEnum
+✅ **DateTime svojstva** u svim relevantnim klasama
+✅ **Veze 1-N i N-N** pravilno implementirane
+✅ **3+ trgovine** inicijalizirane s podatcima
+✅ **8 LINQ upita** s raznolikim operacijama
+✅ **7 Async upita** s await operatorom
+✅ **Dokumentacija** - detaljnu u lab-1/ folderu
+✅ **GitHub spreman** - .gitignore i README
+
+---
+
+## GitHub Struktura
+
+```
+OcjenjivanjeTrgovanja/
+├── OcjenjivanjeTrgovanja/          # Projekt
+│   ├── Models/                      # 8 klasa
+│   │   ├── OcjeneEnum.cs
+│   │   ├── Korisnik.cs
+│   │   ├── Kategorija.cs
+│   │   ├── Trgovina.cs
+│   │   ├── Proizvod.cs
+│   │   ├── Ocjena.cs
+│   │   ├── Kupnja.cs
+│   │   └── KupnjaProizvod.cs
+│   ├── Services/
+│   │   └── TrgovanjeService.cs     # 7 async metoda
+│   ├── Controllers/
+│   ├── Program.cs                  # 450+ linija (LINQ + Async)
+│   ├── README.md
+│   └── .gitignore
+├── lab-1/                          # Lab dokumentacija
+│   ├── README.md                   # Detaljnu dokumentacija
+│   └── AI_AGENT_LOG.md             # Ovaj file
+└── OcjenjivanjeTrgovanja.slnx      # Solution file
+```
+
+---
+
+Projekt je **100% gotov** i spreman za GitHub!
