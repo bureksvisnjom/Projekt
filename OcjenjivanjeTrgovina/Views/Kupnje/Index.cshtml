@@ -1,0 +1,75 @@
+@model IEnumerable<OcjenjivanjeTrgovina.Models.Kupnja>
+
+@{
+    ViewData["Title"] = "Kupnje";
+    var kupnjeList = Model.ToList();
+}
+
+<div class="container-fluid py-5">
+    <div class="row mb-5">
+        <div class="col-lg-8">
+            <h1 class="display-4 fw-bold mb-2">
+                <i class="bi bi-bag"></i> Kupnje
+            </h1>
+            <p class="text-muted fs-5">Pregledajte sve kupnje sa detaljima o datumima, iznosima i stavkama</p>
+        </div>
+    </div>
+
+    @if (!kupnjeList.Any())
+    {
+        <div class="alert alert-info text-center py-5">
+            <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+            <h4 class="mt-3">Nema dostupnih kupnji</h4>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var kupnja in kupnjeList)
+            {
+                <div class="col-lg-6 col-xl-4">
+                    <div class="card h-100 shadow-sm border-0 position-relative overflow-hidden transition">
+                        <div class="position-absolute top-0 end-0 p-3">
+                            <span class="badge bg-info">ID: @kupnja.Id</span>
+                        </div>
+
+                        <div class="card-body pb-2">
+                            <h5 class="card-title fw-bold mb-2" style="color: #2c3e50;">
+                                <i class="bi bi-bag text-primary"></i> Kupnja #@kupnja.Id
+                            </h5>
+
+                            <p class="card-text text-muted small mb-3">
+                                Korisnik ID: @kupnja.KorisnikId | Trgovina ID: @kupnja.TrgovinaId
+                            </p>
+
+                            <p class="mb-2">
+                                <i class="bi bi-calendar"></i>
+                                <strong>Datum:</strong> @kupnja.DatumKupnje.ToString("d.M.yyyy")
+                            </p>
+
+                            <p class="mb-2">
+                                <i class="bi bi-cash-coin text-success"></i>
+                                <strong class="fs-5">@kupnja.UkupanIznos.ToString("F2")€</strong>
+                            </p>
+
+                            <p class="small text-muted mb-0">
+                                <i class="bi bi-note"></i> @(string.IsNullOrEmpty(kupnja.Napomena) ? "Nema napomene" : kupnja.Napomena)
+                            </p>
+                        </div>
+
+                        <div class="card-footer bg-light border-0 p-3">
+                            <a href="@Url.Action("Details", "Kupnje", new { id = kupnja.Id })" class="btn btn-sm btn-primary w-100">
+                                <i class="bi bi-eye"></i> Pogledaj Detalje
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<style>
+    .transition { transition: all 0.3s ease; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15) !important; }
+</style>

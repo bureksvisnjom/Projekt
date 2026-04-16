@@ -1,0 +1,127 @@
+@model OcjenjivanjeTrgovina.Models.Kupnja
+
+@{
+    ViewData["Title"] = "Kupnja - Detalji";
+}
+
+<div class="container-fluid py-5">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Home")" class="text-decoration-none">
+                    <i class="bi bi-house"></i> Početna
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Kupnje")" class="text-decoration-none">
+                    <i class="bi bi-bag"></i> Kupnje
+                </a>
+            </li>
+            <li class="breadcrumb-item active">Kupnja #@Model?.Id</li>
+        </ol>
+    </nav>
+
+    @if (Model == null)
+    {
+        <div class="alert alert-warning text-center py-5">
+            <i class="bi bi-exclamation-triangle" style="font-size: 2rem;"></i>
+            <h4 class="mt-3">Kupnja nije pronađena</h4>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
+                    <div class="card-body p-5">
+                        <h1 class="display-5 fw-bold mb-4">
+                            <i class="bi bi-bag text-primary"></i> Kupnja #@Model.Id
+                        </h1>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <strong class="d-block text-muted mb-1">Korisnik ID:</strong>
+                                <p class="fs-5">@Model.KorisnikId</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong class="d-block text-muted mb-1">Trgovina ID:</strong>
+                                <p class="fs-5">@Model.TrgovinaId</p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <strong class="d-block text-muted mb-1">Datum Kupnje:</strong>
+                                <p class="fs-5">@Model.DatumKupnje.ToString("d.M.yyyy")</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong class="d-block text-muted mb-1">Ukupan Iznos:</strong>
+                                <p class="fs-4 text-primary fw-bold">@Model.UkupanIznos.ToString("F2")€</p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div>
+                            <strong class="d-block text-muted mb-2">Napomena:</strong>
+                            <p>@(string.IsNullOrEmpty(Model.Napomena) ? "Nema napomene" : Model.Napomena)</p>
+                        </div>
+                    </div>
+                </div>
+
+                @if (Model.StavkeKupnje != null && Model.StavkeKupnje.Any())
+                {
+                    <div class="card shadow-sm border-0" style="border-radius: 12px;">
+                        <div class="card-body p-5">
+                            <h5 class="card-title fw-bold mb-4">
+                                <i class="bi bi-list-check"></i> Stavke Kupnje
+                            </h5>
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Proizvoda</th>
+                                            <th>Količina</th>
+                                            <th>Cijena</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var stavka in Model.StavkeKupnje)
+                                        {
+                                            <tr>
+                                                <td>@stavka.ProizvodId</td>
+                                                <td>@stavka.Količina</td>
+                                                <td>@stavka.Cijena.ToString("F2")€</td>
+                                                <td class="fw-bold">@(stavka.Cijena * stavka.Količina).ToString("F2")€</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px; position: sticky; top: 20px;">
+                    <div class="card-body p-4">
+                        <h6 class="card-title fw-bold mb-3">Akcije</h6>
+                        <div class="d-grid gap-2">
+                            <a href="@Url.Action("Index", "Kupnje")" class="btn btn-outline-primary">
+                                <i class="bi bi-arrow-left"></i> Nazad
+                            </a>
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary">
+                                <i class="bi bi-house"></i> Početna
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
