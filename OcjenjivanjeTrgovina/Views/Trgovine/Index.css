@@ -1,0 +1,373 @@
+/* ============================================================================
+   INDEX.CSS - Store Listing Page Specific Styles
+   ============================================================================
+   
+   This file contains detailed styles for the Index.cshtml view
+   (Store Listing / Browse Stores page)
+   
+   Should be imported after Trgovine.css
+   ============================================================================ */
+
+/* ============================================================================
+   PAGE HEADER SECTION
+   ============================================================================ */
+
+.index-header {
+    margin-bottom: 3rem;
+    padding: 1rem 0;
+}
+
+.index-header .display-4 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.index-header .display-4 .bi {
+    color: #0d6efd;
+}
+
+.index-header p {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin: 0;
+}
+
+/* ============================================================================
+   CREATE BUTTON SECTION
+   ============================================================================ */
+
+.btn-create-store {
+    background-color: #0d6efd;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-create-store:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-create-store .bi {
+    font-size: 1.1rem;
+}
+
+/* ============================================================================
+   SEARCH & FILTER SECTION
+   ============================================================================ */
+
+.search-filter-section {
+    margin-bottom: 2rem;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.search-filter-section .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+#searchInput {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 2px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+    outline: none;
+}
+
+#searchInput::placeholder {
+    color: #adb5bd;
+}
+
+#filterGrad {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 2px solid #dee2e6;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#filterGrad:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+    outline: none;
+}
+
+/* ============================================================================
+   STORE CARDS GRID
+   ============================================================================ */
+
+#tradeStoresGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* ============================================================================
+   EMPTY STATE SECTION
+   ============================================================================ */
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.empty-state h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+}
+
+/* ============================================================================
+   PAGINATION / INFO SECTION
+   ============================================================================ */
+
+.pagination-info {
+    text-align: center;
+    padding: 2rem 0;
+    color: #6c757d;
+    border-top: 1px solid #e9ecef;
+    margin-top: 2rem;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+/* Large Screens (lg and above) */
+@media (min-width: 1200px) {
+    #tradeStoresGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .search-filter-section .row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Medium Screens (md) */
+@media (max-width: 991px) {
+    #tradeStoresGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .index-header {
+        margin-bottom: 2rem;
+    }
+    
+    .index-header .display-4 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Tablets (md to sm) */
+@media (max-width: 768px) {
+    #tradeStoresGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .search-filter-section {
+        padding: 1rem;
+    }
+    
+    .search-filter-section .row {
+        grid-template-columns: 1fr;
+    }
+    
+    #searchInput,
+    #filterGrad {
+        width: 100%;
+    }
+    
+    .index-header .display-4 {
+        font-size: 2rem;
+        flex-wrap: wrap;
+    }
+    
+    .btn-create-store {
+        font-size: 0.95rem;
+        padding: 0.6rem 1.2rem;
+    }
+}
+
+/* Small Devices (sm) */
+@media (max-width: 576px) {
+    #tradeStoresGrid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .search-filter-section {
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+    }
+    
+    .search-filter-section .row {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .index-header {
+        margin-bottom: 1.5rem;
+    }
+    
+    .index-header .display-4 {
+        font-size: 1.75rem;
+    }
+    
+    .index-header p {
+        font-size: 0.95rem;
+    }
+    
+    .btn-create-store {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    #searchInput,
+    #filterGrad {
+        font-size: 0.95rem;
+        padding: 0.6rem 0.75rem;
+    }
+    
+    .empty-state {
+        padding: 2rem 0.5rem;
+    }
+    
+    .empty-state i {
+        font-size: 2.5rem;
+    }
+    
+    .empty-state h4 {
+        font-size: 1.25rem;
+    }
+}
+
+/* Extra Small Devices (xs) */
+@media (max-width: 360px) {
+    .index-header .display-4 {
+        font-size: 1.5rem;
+    }
+    
+    .index-header p {
+        font-size: 0.9rem;
+    }
+    
+    #searchInput,
+    #filterGrad {
+        font-size: 0.9rem;
+    }
+    
+    .empty-state i {
+        font-size: 2rem;
+    }
+}
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
+
+/* Fade in animation for new cards */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.trade-store-card {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Smooth exit animation */
+.trade-store-card.hidden {
+    animation: fadeOut 0.2s ease-in forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* ============================================================================
+   ACCESSIBILITY
+   ============================================================================ */
+
+/* Focus styles for keyboard navigation */
+#searchInput:focus,
+#filterGrad:focus,
+.btn-create-store:focus {
+    outline: 2px solid #0d6efd;
+    outline-offset: 2px;
+}
+
+/* ============================================================================
+   PRINT STYLES
+   ============================================================================ */
+
+@media print {
+    .btn-create-store,
+    .search-filter-section {
+        display: none;
+    }
+    
+    .pagination-info {
+        display: none;
+    }
+    
+    #tradeStoresGrid {
+        grid-template-columns: 1fr;
+    }
+}

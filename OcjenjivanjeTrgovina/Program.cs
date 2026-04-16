@@ -4,7 +4,17 @@ using OcjenjivanjeTrgovina.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddRazorPages();
+builder.Services.AddMvc();
 builder.Services.AddOpenApi();
+
+// Register Services
+builder.Services.AddSingleton<TrgovanjeService>();
+builder.Services.AddSingleton<ProizvodiMockRepository>();
+builder.Services.AddSingleton<KorisnikMockRepository>();
+builder.Services.AddSingleton<KupnjeMockRepository>();
+builder.Services.AddSingleton<OcjeneMockRepository>();
+builder.Services.AddSingleton<KategorijaMockRepository>();
 
 var app = builder.Build();
 
@@ -465,7 +475,20 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
 app.UseAuthorization();
+
+// Initialize TrgovanjeService with test data
+var trgovanjeService = app.Services.GetRequiredService<TrgovanjeService>();
+var sve_trgovine_init = new List<Trgovina> { trgovina1, trgovina2, trgovina3 };
+trgovanjeService.InicijalizirajTrgovine(sve_trgovine_init);
+
+// Map controller routes
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.MapControllers();
 
 await app.RunAsync();

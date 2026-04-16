@@ -1,0 +1,161 @@
+@model OcjenjivanjeTrgovina.Models.Proizvod
+
+@{
+    ViewData["Title"] = $"{Model?.Naziv ?? "Proizvod"} - Detalji";
+}
+
+<div class="container-fluid py-5">
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Home")" class="text-decoration-none">
+                    <i class="bi bi-house"></i> Početna
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Proizvodi")" class="text-decoration-none">
+                    <i class="bi bi-box"></i> Proizvodi
+                </a>
+            </li>
+            <li class="breadcrumb-item active">@Model?.Naziv</li>
+        </ol>
+    </nav>
+
+    @if (Model == null)
+    {
+        <div class="alert alert-warning text-center py-5">
+            <i class="bi bi-exclamation-triangle" style="font-size: 2rem;"></i>
+            <h4 class="mt-3">Proizvod nije pronađen</h4>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <!-- Header Card -->
+                <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
+                    <div class="card-body p-5">
+                        <div class="d-flex align-items-start justify-content-between mb-4">
+                            <h1 class="display-5 fw-bold mb-0">
+                                <i class="bi bi-box text-primary"></i> @Model.Naziv
+                            </h1>
+                            @if (Model.Dostupan)
+                            {
+                                <span class="badge bg-success" style="font-size: 1rem;">
+                                    <i class="bi bi-check-circle"></i> Dostupan
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger" style="font-size: 1rem;">
+                                    <i class="bi bi-x-circle"></i> Nije dostupno
+                                </span>
+                            }
+                        </div>
+
+                        <p class="text-muted fs-5 mb-4">@Model.Opis</p>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <strong class="d-block text-muted mb-1">Cijena:</strong>
+                                <h2 class="text-primary fw-bold">
+                                    @Model.Cijena.ToString("F2")€
+                                </h2>
+                            </div>
+                            <div class="col-md-6">
+                                <strong class="d-block text-muted mb-1">Status:</strong>
+                                <p class="fs-5">
+                                    @if (Model.Dostupan)
+                                    {
+                                        <span class="badge bg-success">Dostupan</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">Nije dostupno</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Card -->
+                <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
+                    <div class="card-body p-5">
+                        <h5 class="card-title fw-bold mb-4">
+                            <i class="bi bi-info-circle"></i> Informacije
+                        </h5>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <strong class="d-block text-muted small mb-1">ID Proizvoda:</strong>
+                                <p class="mb-0">@Model.Id</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <strong class="d-block text-muted small mb-1">Kategorija ID:</strong>
+                                <p class="mb-0">@Model.KategorijId</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <strong class="d-block text-muted small mb-1">Trgovina ID:</strong>
+                                <p class="mb-0">@Model.TrgovinaId</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <strong class="d-block text-muted small mb-1">Dostupnost:</strong>
+                                <p class="mb-0">
+                                    @if (Model.Dostupan)
+                                    {
+                                        <span class="badge bg-success">Dostupan</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">Nije dostupno</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Action Buttons -->
+                <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px; position: sticky; top: 20px;">
+                    <div class="card-body p-4">
+                        <h6 class="card-title fw-bold mb-3">Akcije</h6>
+                        <div class="d-grid gap-2">
+                            <a href="@Url.Action("Index", "Proizvodi")" class="btn btn-outline-primary">
+                                <i class="bi bi-arrow-left"></i> Nazad na Proizvode
+                            </a>
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary">
+                                <i class="bi bi-house"></i> Početna
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Info -->
+                <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
+                    <div class="card-body p-4">
+                        <h6 class="card-title fw-bold mb-3">
+                            <i class="bi bi-tag"></i> Brzi Pregled
+                        </h6>
+                        <ul class="list-unstyled small">
+                            <li class="mb-2">
+                                <strong>Naziv:</strong> @Model.Naziv
+                            </li>
+                            <li class="mb-2">
+                                <strong>Cijena:</strong> @Model.Cijena.ToString("F2")€
+                            </li>
+                            <li class="mb-2">
+                                <strong>Status:</strong> @(Model.Dostupan ? "Dostupan" : "Nije dostupno")
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

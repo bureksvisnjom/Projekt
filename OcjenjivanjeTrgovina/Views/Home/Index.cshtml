@@ -1,0 +1,192 @@
+@{
+    ViewData["Title"] = "Početna";
+}
+
+<div class="container-fluid py-5">
+    <!-- Hero Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="bg-gradient p-5" style="background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%); border-radius: 12px; color: white;">
+                <h1 class="display-4 fw-bold mb-3">
+                    <i class="bi bi-shop-window"></i> Ocjenjivanja Trgovina
+                </h1>
+                <p class="fs-5 mb-0">Sveobuhvatan sustav za prikaz, analizu i ocjenjivanje online trgovina</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="row mb-5 g-4">
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 h-100" style="border-radius: 12px;">
+                <div class="card-body text-center">
+                    <i class="bi bi-shop" style="font-size: 2.5rem; color: #0d6efd;"></i>
+                    <h5 class="card-title mt-3">Trgovine</h5>
+                    <p class="card-text text-muted small">Pregledajte sve dostupne trgovine</p>
+                    <a href="@Url.Action("Index", "Trgovine")" class="btn btn-sm btn-primary mt-2">
+                        <i class="bi bi-arrow-right"></i> Pogledaj
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 h-100" style="border-radius: 12px;">
+                <div class="card-body text-center">
+                    <i class="bi bi-box" style="font-size: 2.5rem; color: #198754;"></i>
+                    <h5 class="card-title mt-3">Proizvodi</h5>
+                    <p class="card-text text-muted small">Pronađite proizvode iz različitih kategorija</p>
+                    <a href="@Url.Action("Index", "Proizvodi")" class="btn btn-sm btn-success mt-2">
+                        <i class="bi bi-arrow-right"></i> Pogledaj
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 h-100" style="border-radius: 12px;">
+                <div class="card-body text-center">
+                    <i class="bi bi-people" style="font-size: 2.5rem; color: #0dcaf0;"></i>
+                    <h5 class="card-title mt-3">Korisnici</h5>
+                    <p class="card-text text-muted small">Saznajte više o registriranim korisnicima</p>
+                    <a href="@Url.Action("Index", "Korisnici")" class="btn btn-sm btn-info mt-2">
+                        <i class="bi bi-arrow-right"></i> Pogledaj
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 h-100" style="border-radius: 12px;">
+                <div class="card-body text-center">
+                    <i class="bi bi-star" style="font-size: 2.5rem; color: #ffc107;"></i>
+                    <h5 class="card-title mt-3">Ocjene</h5>
+                    <p class="card-text text-muted small">Pregledajte sve ocjene i mišljenja korisnika</p>
+                    <a href="@Url.Action("Index", "Ocjene")" class="btn btn-sm btn-warning mt-2">
+                        <i class="bi bi-arrow-right"></i> Pogledaj
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="display-6 fw-bold mb-4">Dostupne Sekcije</h2>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0" style="border-radius: 12px;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">
+                        <i class="bi bi-shop text-primary"></i> Trgovine
+                    </h5>
+                    <p class="card-text">Kompletna baza dodelih trgovina sa detaljima o lokaciji, kontaktu i raspoloživim proizvodima.</p>
+                    <a href="@Url.Action("Index", "Trgovine")" class="btn btn-outline-primary btn-sm">Otkrij Trgovine</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0" style="border-radius: 12px;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">
+                        <i class="bi bi-box text-success"></i> Proizvodi
+                    </h5>
+                    <p class="card-text">Pregled proizvoda podijeljenih u različitim kategorijama s detaljima o cijeni i dostupnosti.</p>
+                    <a href="@Url.Action("Index", "Proizvodi")" class="btn btn-outline-success btn-sm">Otkrij Proizvode</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0" style="border-radius: 12px;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">
+                        <i class="bi bi-bag text-info"></i> Kupnje
+                    </h5>
+                    <p class="card-text">Pregled svih kupnji korisnika sa detaljima o datumima, iznosima i stavkama kupnje.</p>
+                    <a href="@Url.Action("Index", "Kupnje")" class="btn btn-outline-info btn-sm">Otkrij Kupnje</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0" style="border-radius: 12px;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">
+                        <i class="bi bi-people text-primary"></i> Korisnici
+                    </h5>
+                    <p class="card-text">Lista svih registriranih korisnika sa informacijama o njihovom profilu i aktivnosti.</p>
+                    <a href="@Url.Action("Index", "Korisnici")" class="btn btn-outline-primary btn-sm">Otkrij Korisnike</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0" style="border-radius: 12px;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">
+                        <i class="bi bi-star text-warning"></i> Ocjene
+                    </h5>
+                    <p class="card-text">Sve ocjene i mišljenja korisnika sa detaljna analiza prema vrsti i vremenskom periodu.</p>
+                    <a href="@Url.Action("Index", "Ocjene")" class="btn btn-outline-warning btn-sm">Otkrij Ocjene</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0" style="border-radius: 12px;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">
+                        <i class="bi bi-tags text-secondary"></i> Kategorije
+                    </h5>
+                    <p class="card-text">Pregled kategorija proizvoda sa brojem dostupnih proizvoda u svakoj kategoriji.</p>
+                    <a href="@Url.Action("Index", "Kategorije")" class="btn btn-outline-secondary btn-sm">Otkrij Kategorije</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="alert alert-info border-0" style="border-radius: 12px;">
+                <i class="bi bi-info-circle"></i>
+                <strong class="ms-2">Info:</strong>
+                <span class="ms-2">Ova aplikacija omogućava pregledavanje i analizu podataka o trgovinama, proizvodima, kupcima i ocjenama. Sve podatke možete pregledati kroz detaljne prikaze sa mogućnosšću navigacije između entiteta.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-gradient {
+        background-size: 200% 200%;
+        animation: gradient 15s ease infinite;
+    }
+
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .card {
+        transition: all 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .btn {
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+        transform: translateX(4px);
+    }
+</style>

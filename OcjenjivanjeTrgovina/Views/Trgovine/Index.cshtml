@@ -1,0 +1,284 @@
+@model IEnumerable<OcjenjivanjeTrgovina.Models.Trgovina>
+
+@{
+    ViewData["Title"] = "Trgovine";
+    var trgovineList = Model.ToList();
+}
+
+<div class="container-fluid py-5">
+    <!-- Header Section with Navigation -->
+    <div class="row mb-5">
+        <div class="col-lg-8">
+            <h1 class="display-4 fw-bold mb-2">
+                <i class="bi bi-shop"></i> Trgovine
+            </h1>
+            <p class="text-muted fs-5">Pregledajte sve dostupne trgovine i istražite njihov asortiman</p>
+        </div>
+        <div class="col-lg-4 d-flex align-items-end justify-content-lg-end">
+            <a href="@Url.Action("Create")" class="btn btn-primary btn-lg">
+                <i class="bi bi-plus-circle"></i> Nova Trgovina
+            </a>
+        </div>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="input-group input-group-lg">
+                <span class="input-group-text bg-light border-0">
+                    <i class="bi bi-search"></i>
+                </span>
+                <input type="text" class="form-control form-control-lg border-start-0" 
+                       placeholder="Pretraži trgovine po imenu ili gradu..." id="searchInput">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <select class="form-select form-select-lg" id="filterGrad">
+                <option value="">Svi gradovi</option>
+                @foreach (var grad in trgovineList.Select(t => t.Grad).Distinct().OrderBy(g => g))
+                {
+                    <option value="@grad">@grad</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <!-- Empty State -->
+    @if (!trgovineList.Any())
+    {
+        <div class="alert alert-info text-center py-5">
+            <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+            <h4 class="mt-3">Nema dostupnih trgovina</h4>
+            <p class="mb-0">Počnite dodavanjem prve trgovine</p>
+            <a href="@Url.Action("Create")" class="btn btn-primary mt-3">
+                <i class="bi bi-plus-circle"></i> Kreiraj Trgovinu
+            </a>
+        </div>
+    }
+    else
+    {
+        <!-- Cards Grid -->
+        <div class="row g-4" id="tradeStoresGrid">
+            @foreach (var trgovina in trgovineList)
+            {
+                <div class="col-lg-6 col-xl-4 trade-store-card" data-grad="@trgovina.Grad" data-naziv="@trgovina.Naziv.ToLower()">
+                    <div class="card h-100 shadow-sm border-0 position-relative overflow-hidden transition">
+                        <!-- Card Header with Badge -->
+                        <div class="position-absolute top-0 end-0 p-3">
+                            <span class="badge bg-success">
+                                <i class="bi bi-check-circle"></i> Aktivna
+                            </span>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body pb-2">
+                            <!-- Store Name -->
+                            <h5 class="card-title fw-bold mb-3" style="color: #2c3e50;">
+                                <i class="bi bi-shop text-primary"></i> @trgovina.Naziv
+                            </h5>
+
+                            <!-- Store Details -->
+                            <div class="store-details">
+                                <p class="mb-3">
+                                    <i class="bi bi-geo-alt text-danger"></i>
+                                    <span class="ms-2">
+                                        @trgovina.Adresa<br>
+                                        <small class="text-muted">@trgovina.Grad</small>
+                                    </span>
+                                </p>
+
+                                <p class="mb-3">
+                                    <i class="bi bi-telephone text-info"></i>
+                                    <span class="ms-2">
+                                        <a href="tel:@trgovina.Telefon" class="text-decoration-none">@trgovina.Telefon</a>
+                                    </span>
+                                </p>
+
+                                <p class="mb-3">
+                                    <i class="bi bi-envelope text-primary"></i>
+                                    <span class="ms-2">
+                                        <a href="mailto:@trgovina.Email" class="text-decoration-none">@trgovina.Email</a>
+                                    </span>
+                                </p>
+
+                                <p class="mb-0">
+                                    <i class="bi bi-calendar-event text-warning"></i>
+                                    <span class="ms-2">
+                                        Otvorena: <small class="text-muted">@trgovina.DatumOtvaranja.ToString("dd.MM.yyyy")</small>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card Stats -->
+                        <div class="row px-3 py-3 bg-light border-top border-bottom">
+                            <div class="col-6 text-center">
+                                <div class="stat-item">
+                                    <h6 class="fw-bold text-primary mb-1">@(trgovina.Proizvodi?.Count ?? 0)</h6>
+                                    <small class="text-muted">Proizvodi</small>
+                                </div>
+                            </div>
+                            <div class="col-6 text-center">
+                                <div class="stat-item">
+                                    <h6 class="fw-bold text-success mb-1">@(trgovina.Ocjene?.Count ?? 0)</h6>
+                                    <small class="text-muted">Ocjene</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Average Rating -->
+                        @if (trgovina.Ocjene?.Any() == true)
+                        {
+                            var avgRating = (int)Math.Round(trgovina.Ocjene.Average(o => o.Vrijednost));
+                            <div class="px-3 py-3">
+                                <div class="d-flex align-items-center">
+                                    <span class="text-warning">
+                                        @for (int i = 0; i < avgRating; i++)
+                                        {
+                                            <i class="bi bi-star-fill"></i>
+                                        }
+                                        @for (int i = avgRating; i < 5; i++)
+                                        {
+                                            <i class="bi bi-star"></i>
+                                        }
+                                    </span>
+                                    <span class="ms-2 small text-muted">(@(avgRating)/5)</span>
+                                </div>
+                            </div>
+                        }
+
+                        <!-- Card Footer with Actions -->
+                        <div class="card-footer bg-light border-top-0 d-grid gap-2">
+                            <a href="@Url.Action("Details", new { id = trgovina.Id })" 
+                               class="btn btn-outline-primary py-2">
+                                <i class="bi bi-eye"></i> Detalji
+                            </a>
+                            <div class="btn-group" role="group">
+                                <a href="#" class="btn btn-outline-secondary btn-sm flex-grow-1">
+                                    <i class="bi bi-pencil"></i> Uredi
+                                </a>
+                                <a href="#" class="btn btn-outline-danger btn-sm flex-grow-1">
+                                    <i class="bi bi-trash"></i> Obriši
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Pagination Info -->
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <p class="text-muted">
+                    Prikazano @(trgovineList.Count) od @(trgovineList.Count) trgovine
+                </p>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- CSS Styling -->
+<style>
+    :root {
+        --primary-color: #0d6efd;
+        --secondary-color: #6c757d;
+        --success-color: #198754;
+        --danger-color: #dc3545;
+    }
+
+    .card {
+        transition: all 0.3s ease;
+        border-radius: 12px;
+    }
+
+    .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        word-break: break-word;
+    }
+
+    .store-details i {
+        font-size: 1.1rem;
+        min-width: 24px;
+    }
+
+    .stat-item {
+        padding: 10px 0;
+    }
+
+    .stat-item h6 {
+        font-size: 1.5rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .transition {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-group {
+        display: flex;
+        gap: 0.25rem;
+    }
+
+    .btn-outline-secondary:hover,
+    .btn-outline-danger:hover {
+        color: white;
+    }
+
+    @media (max-width: 576px) {
+        .display-4 {
+            font-size: 2rem;
+        }
+
+        .card-body {
+            padding: 1rem;
+        }
+
+        .btn-lg {
+            font-size: 0.875rem;
+            padding: 0.5rem 1rem;
+        }
+    }
+
+    /* Hide filter items that don't match */
+    .trade-store-card.hidden {
+        display: none;
+    }
+
+    /* Smooth scroll behavior */
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+
+<!-- JavaScript for Search and Filter -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        const filterGrad = document.getElementById('filterGrad');
+        const cards = document.querySelectorAll('.trade-store-card');
+
+        function filterCards() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedGrad = filterGrad.value;
+
+            cards.forEach(card => {
+                const naziv = card.getAttribute('data-naziv');
+                const grad = card.getAttribute('data-grad');
+
+                const matchesSearch = !searchTerm || naziv.includes(searchTerm);
+                const matchesGrad = !selectedGrad || grad === selectedGrad;
+
+                card.classList.toggle('hidden', !(matchesSearch && matchesGrad));
+            });
+        }
+
+        searchInput.addEventListener('input', filterCards);
+        filterGrad.addEventListener('change', filterCards);
+    });
+</script>

@@ -1,0 +1,106 @@
+@model IEnumerable<OcjenjivanjeTrgovina.Models.Ocjena>
+
+@{
+    ViewData["Title"] = "Ocjene";
+    var ocjeneList = Model.ToList();
+}
+
+<div class="container-fluid py-5">
+    <div class="row mb-5">
+        <div class="col-lg-8">
+            <h1 class="display-4 fw-bold mb-2">
+                <i class="bi bi-star"></i> Ocjene
+            </h1>
+            <p class="text-muted fs-5">Pregledajte sve ocjene i mišljenja korisnika</p>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <select class="form-select form-select-lg" id="filterRating">
+                <option value="">Sve ocjene</option>
+                <option value="1">1 Zvijezda</option>
+                <option value="2">2 Zvijezde</option>
+                <option value="3">3 Zvijezde</option>
+                <option value="4">4 Zvijezde</option>
+                <option value="5">5 Zvijezda</option>
+            </select>
+        </div>
+    </div>
+
+    @if (!ocjeneList.Any())
+    {
+        <div class="alert alert-info text-center py-5">
+            <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+            <h4 class="mt-3">Nema dostupnih ocjena</h4>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4" id="ratingsGrid">
+            @foreach (var ocjena in ocjeneList)
+            {
+                <div class="col-lg-6 ocjena-card" data-rating="@ocjena.Vrijednost">
+                    <div class="card h-100 shadow-sm border-0 position-relative overflow-hidden transition">
+                        <div class="position-absolute top-0 end-0 p-3">
+                            <span class="badge bg-warning">
+                                @for(int i = 0; i < ocjena.Vrijednost; i++) {
+                                    <i class="bi bi-star-fill"></i>
+                                }
+                            </span>
+                        </div>
+
+                        <div class="card-body pb-2">
+                            <h5 class="card-title fw-bold mb-2" style="color: #2c3e50;">
+                                <i class="bi bi-star text-warning"></i> Ocjena #@ocjena.Id
+                            </h5>
+
+                            <p class="small text-muted mb-3">
+                                Trgovina ID: @ocjena.TrgovinaId | Korisnik ID: @ocjena.KorisnikId
+                            </p>
+
+                            <p class="card-text mb-2">@ocjena.Komentar</p>
+
+                            <div class="mb-2">
+                                <span class="badge bg-light text-dark">
+                                    <i class="bi bi-tag"></i> @ocjena.VrstaOcjene
+                                </span>
+                            </div>
+
+                            <p class="small text-muted mb-0">
+                                <i class="bi bi-calendar"></i> @ocjena.DatumOcjene.ToString("d.M.yyyy")
+                            </p>
+                        </div>
+
+                        <div class="card-footer bg-light border-0 p-3">
+                            <a href="@Url.Action("Details", "Ocjene", new { id = ocjena.Id })" class="btn btn-sm btn-primary w-100">
+                                <i class="bi bi-eye"></i> Pogledaj Detalje
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<style>
+    .transition { transition: all 0.3s ease; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15) !important; }
+</style>
+
+@section Scripts {
+    <script>
+        document.getElementById('filterRating').addEventListener('change', filterRatings);
+
+        function filterRatings() {
+            const rating = document.getElementById('filterRating').value;
+            const cards = document.querySelectorAll('.ocjena-card');
+
+            cards.forEach(card => {
+                const cardRating = card.getAttribute('data-rating');
+                card.style.display = rating === '' || cardRating === rating ? '' : 'none';
+            });
+        }
+    </script>
+}

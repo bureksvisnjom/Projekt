@@ -1,0 +1,621 @@
+/* ============================================================================
+   DETAILS.CSS - Store Details Page Specific Styles
+   ============================================================================
+   
+   This file contains detailed styles for the Details.cshtml view
+   (Individual Store Details page)
+   
+   Should be imported after Trgovine.css
+   ============================================================================ */
+
+/* ============================================================================
+   PAGE BREADCRUMB
+   ============================================================================ */
+
+.details-breadcrumb {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-left: 4px solid #0d6efd;
+}
+
+.details-breadcrumb .breadcrumb {
+    margin: 0;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+}
+
+.details-breadcrumb .breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.details-breadcrumb .breadcrumb-item a {
+    color: #0d6efd;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.details-breadcrumb .breadcrumb-item a:hover {
+    color: #0b5ed7;
+    text-decoration: underline;
+}
+
+/* ============================================================================
+   STORE HEADER CARD
+   ============================================================================ */
+
+.store-header-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.store-header-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.store-header-card .card-body {
+    padding: 2rem;
+}
+
+/* Header Title Section */
+.store-header-title {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.store-header-title h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.store-header-title .badge {
+    background-color: #198754;
+    white-space: nowrap;
+}
+
+/* Information Grid */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.info-group h6 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6c757d;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.info-group p {
+    margin: 0 0 0.25rem 0;
+    color: #2c3e50;
+    font-size: 1rem;
+}
+
+.info-group small {
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+.info-group a {
+    color: #0d6efd;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.info-group a:hover {
+    color: #0b5ed7;
+    text-decoration: underline;
+}
+
+/* ============================================================================
+   STATISTICS SECTION
+   ============================================================================ */
+
+.stats-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.stat-card .card-body {
+    text-align: center;
+    padding: 2rem 1.5rem;
+}
+
+.stat-card h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0.5rem 0 0.75rem 0;
+    color: #0d6efd;
+}
+
+.stat-card p {
+    margin: 0;
+    color: #6c757d;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Color variants for different stats */
+.stat-card:nth-child(1) h3 {
+    color: #0d6efd;
+}
+
+.stat-card:nth-child(2) h3 {
+    color: #198754;
+}
+
+/* ============================================================================
+   RATING SECTION
+   ============================================================================ */
+
+.rating-section {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+    padding: 2rem;
+}
+
+.rating-section .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rating-display {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.rating-stars {
+    font-size: 2rem;
+    color: #ffc107;
+}
+
+.rating-info h6 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    color: #2c3e50;
+}
+
+.rating-info small {
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+/* Progress bar */
+.rating-progress {
+    height: 1.5rem;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.rating-progress .progress-bar {
+    background-color: #ffc107;
+    transition: width 0.5s ease;
+}
+
+/* ============================================================================
+   SIDEBAR - ACTION BUTTONS
+   ============================================================================ */
+
+.sidebar-actions {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+}
+
+.sidebar-actions .card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.sidebar-actions .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.sidebar-actions .btn:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar-actions .btn-outline-secondary {
+    border: 2px solid #6c757d;
+    color: #6c757d;
+}
+
+.sidebar-actions .btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+.sidebar-actions .btn-warning {
+    background-color: #ffc107;
+    color: #212529;
+    border: 2px solid #ffc107;
+}
+
+.sidebar-actions .btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #e0a800;
+}
+
+.sidebar-actions .btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: 2px solid #dc3545;
+}
+
+.sidebar-actions .btn-danger:hover {
+    background-color: #bb2d3b;
+    border-color: #bb2d3b;
+}
+
+/* ============================================================================
+   SIDEBAR - QUICK STATS
+   ============================================================================ */
+
+.quick-stats {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+}
+
+.quick-stats .card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.quick-stats dl {
+    margin: 0;
+}
+
+.quick-stats dt {
+    float: left;
+    clear: left;
+    width: 60%;
+    text-align: right;
+    padding-right: 1rem;
+    font-weight: 500;
+    color: #6c757d;
+}
+
+.quick-stats dd {
+    float: right;
+    width: 40%;
+    margin: 0;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* ============================================================================
+   SIDEBAR - INFO BOX
+   ============================================================================ */
+
+.info-box {
+    background-color: rgba(13, 202, 240, 0.1);
+    border-radius: 12px;
+    padding: 1.25rem;
+    color: #0c5460;
+    border-left: 4px solid #0dcaf0;
+}
+
+.info-box strong {
+    color: #0c5460;
+}
+
+/* ============================================================================
+   PRODUCTS SECTION
+   ============================================================================ */
+
+.products-section {
+    margin-top: 3rem;
+}
+
+.products-section h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #2c3e50;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.product-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.product-card .card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card .card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.product-card .card-text {
+    font-size: 0.875rem;
+    color: #6c757d;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+}
+
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.product-price {
+    font-weight: 600;
+    color: #0d6efd;
+    font-size: 1.1rem;
+}
+
+/* ============================================================================
+   NOT FOUND STATE
+   ============================================================================ */
+
+.not-found-state {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.not-found-state i {
+    font-size: 3rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.not-found-state h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.not-found-state p {
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+/* Medium Screens (lg) */
+@media (max-width: 991px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .store-header-title {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .store-header-title h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Tablets (md) */
+@media (max-width: 768px) {
+    .store-header-card .card-body {
+        padding: 1.5rem;
+    }
+    
+    .store-header-title h1 {
+        font-size: 1.75rem;
+    }
+    
+    .stats-section {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .rating-display {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .info-grid {
+        gap: 1rem;
+    }
+    
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .quick-stats dt,
+    .quick-stats dd {
+        float: none;
+        width: auto;
+        text-align: left;
+        padding: 0.25rem 0;
+    }
+}
+
+/* Small Devices (sm) */
+@media (max-width: 576px) {
+    .details-breadcrumb {
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+    }
+    
+    .store-header-title h1 {
+        font-size: 1.5rem;
+    }
+    
+    .store-header-card .card-body {
+        padding: 1rem;
+    }
+    
+    .stat-card h3 {
+        font-size: 2rem;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .product-card .card-body {
+        padding: 0.75rem;
+    }
+    
+    .sidebar-actions,
+    .quick-stats,
+    .info-box {
+        padding: 1rem;
+    }
+    
+    .rating-section {
+        padding: 1rem;
+    }
+    
+    .rating-stars {
+        font-size: 1.5rem;
+    }
+}
+
+/* Extra Small Devices (xs) */
+@media (max-width: 360px) {
+    .store-header-title h1 {
+        font-size: 1.25rem;
+    }
+    
+    .stat-card h3 {
+        font-size: 1.5rem;
+    }
+    
+    .info-group h6 {
+        font-size: 0.7rem;
+    }
+    
+    .rating-info h6 {
+        font-size: 1rem;
+    }
+}
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.store-header-card {
+    animation: slideInDown 0.3s ease-out;
+}
+
+/* ============================================================================
+   ACCESSIBILITY
+   ============================================================================ */
+
+.sidebar-actions .btn:focus,
+.product-card:focus {
+    outline: 2px solid #0d6efd;
+    outline-offset: 2px;
+}
+
+/* ============================================================================
+   PRINT STYLES
+   ============================================================================ */
+
+@media print {
+    .sidebar-actions,
+    .details-breadcrumb {
+        display: none;
+    }
+    
+    .store-header-card,
+    .stat-card,
+    .product-card {
+        box-shadow: none;
+        border: 1px solid #dee2e6;
+    }
+}

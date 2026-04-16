@@ -1,0 +1,281 @@
+@model OcjenjivanjeTrgovina.Models.Trgovina
+
+@{
+    ViewData["Title"] = $"{Model?.Naziv ?? "Trgovina"} - Detalji";
+}
+
+<div class="container-fluid py-5">
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index")" class="text-decoration-none">
+                    <i class="bi bi-house"></i> Početna
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index")" class="text-decoration-none">
+                    <i class="bi bi-shop"></i> Trgovine
+                </a>
+            </li>
+            <li class="breadcrumb-item active">@Model?.Naziv</li>
+        </ol>
+    </nav>
+
+    @if (Model == null)
+    {
+        <div class="alert alert-warning text-center py-5">
+            <i class="bi bi-exclamation-triangle" style="font-size: 2rem;"></i>
+            <h4 class="mt-3">Trgovina nije pronađena</h4>
+            <p class="mb-0">Tražena trgovina ne postoji u bazi podataka</p>
+            <a href="@Url.Action("Index")" class="btn btn-primary mt-3">
+                <i class="bi bi-arrow-left"></i> Nazad na listu
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <!-- Header Card -->
+                <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
+                    <div class="card-body p-5">
+                        <div class="d-flex align-items-start justify-content-between mb-4">
+                            <h1 class="display-5 fw-bold mb-0">
+                                <i class="bi bi-shop text-primary"></i> @Model.Naziv
+                            </h1>
+                            <span class="badge bg-success">
+                                <i class="bi bi-check-circle"></i> Aktivna
+                            </span>
+                        </div>
+
+                        <!-- Basic Information -->
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <h6 class="text-uppercase text-muted small fw-bold">Lokacija</h6>
+                                <p class="mb-0">
+                                    <i class="bi bi-geo-alt text-danger"></i>
+                                    <span class="ms-2">@Model.Adresa</span>
+                                </p>
+                                <p class="text-muted small mb-0">@Model.Grad</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-uppercase text-muted small fw-bold">Kontakt</h6>
+                                <p class="mb-0">
+                                    <i class="bi bi-telephone text-info"></i>
+                                    <a href="tel:@Model.Telefon" class="ms-2 text-decoration-none">@Model.Telefon</a>
+                                </p>
+                                <p class="mb-0">
+                                    <i class="bi bi-envelope text-primary"></i>
+                                    <a href="mailto:@Model.Email" class="ms-2 text-decoration-none">@Model.Email</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h6 class="text-uppercase text-muted small fw-bold">Datum Otvaranja</h6>
+                                <p class="mb-0">
+                                    <i class="bi bi-calendar-event text-warning"></i>
+                                    <span class="ms-2">@Model.DatumOtvaranja.ToString("dd.MM.yyyy")</span>
+                                </p>
+                                <p class="text-muted small mb-0">
+                                    @((DateTime.Now - Model.DatumOtvaranja).Days / 365) godina u poslovanju
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-uppercase text-muted small fw-bold">ID Trgovine</h6>
+                                <p class="mb-0">
+                                    <code>@Model.Id</code>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-0" style="border-radius: 12px;">
+                            <div class="card-body text-center p-4">
+                                <h3 class="text-primary fw-bold mb-2">@(Model.Proizvodi?.Count ?? 0)</h3>
+                                <p class="text-muted mb-0">
+                                    <i class="bi bi-box-seam"></i> Dostupni Proizvodi
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-0" style="border-radius: 12px;">
+                            <div class="card-body text-center p-4">
+                                <h3 class="text-success fw-bold mb-2">@(Model.Ocjene?.Count ?? 0)</h3>
+                                <p class="text-muted mb-0">
+                                    <i class="bi bi-star"></i> Korisničke Ocjene
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rating Section -->
+                @if (Model.Ocjene?.Any() == true)
+                {
+                    var avgRating = Math.Round(Model.Ocjene.Average(o => o.Vrijednost), 2);
+                    <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-bold mb-4">
+                                <i class="bi bi-star-fill text-warning"></i> Prosječna Ocjena
+                            </h5>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="me-3">
+                                    <span class="text-warning" style="font-size: 2rem;">
+                                        @for (int i = 0; i < (int)avgRating; i++)
+                                        {
+                                            <i class="bi bi-star-fill"></i>
+                                        }
+                                        @for (int i = (int)avgRating; i < 5; i++)
+                                        {
+                                            <i class="bi bi-star"></i>
+                                        }
+                                    </span>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">@avgRating / 5.00</h6>
+                                    <small class="text-muted">Bazira se na @Model.Ocjene.Count ocjena</small>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" 
+                                     style="width: @(avgRating * 20)%" 
+                                     aria-valuenow="@(int)(avgRating * 20)" 
+                                     aria-valuemin="0" aria-valuemax="100">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Action Buttons -->
+                <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
+                    <div class="card-body p-4">
+                        <h6 class="card-title fw-bold mb-3">Akcije</h6>
+                        <div class="d-grid gap-2">
+                            <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left"></i> Nazad na listu
+                            </a>
+                            <button type="button" class="btn btn-warning">
+                                <i class="bi bi-pencil"></i> Uredi Trgovinu
+                            </button>
+                            <button type="button" class="btn btn-danger">
+                                <i class="bi bi-trash"></i> Obriši Trgovinu
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
+                    <div class="card-body p-4">
+                        <h6 class="card-title fw-bold mb-3">Brzi Pregled</h6>
+                        <dl class="row mb-0">
+                            <dt class="col-6">Broj Kupnji:</dt>
+                            <dd class="col-6 fw-bold">@(Model.Kupnje?.Count ?? 0)</dd>
+                            <dt class="col-6">Proizvodi:</dt>
+                            <dd class="col-6 fw-bold">@(Model.Proizvodi?.Count ?? 0)</dd>
+                            <dt class="col-6">Ocjene:</dt>
+                            <dd class="col-6 fw-bold">@(Model.Ocjene?.Count ?? 0)</dd>
+                        </dl>
+                    </div>
+                </div>
+
+                <!-- Info Box -->
+                <div class="alert alert-info border-0" role="alert" style="border-radius: 12px;">
+                    <i class="bi bi-info-circle"></i>
+                    <strong class="ms-2">Info:</strong>
+                    <span class="ms-2">Sve informacije o ovoj trgovini se ažuriraju u realnom vremenu.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Section -->
+        @if (Model.Proizvodi?.Any() == true)
+        {
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h4 class="fw-bold mb-4">
+                        <i class="bi bi-box-seam"></i> Proizvodi
+                    </h4>
+                    <div class="row g-3">
+                        @foreach (var proizvod in Model.Proizvodi.Take(6))
+                        {
+                            <div class="col-md-4">
+                                <div class="card shadow-sm border-0 h-100" style="border-radius: 12px;">
+                                    <div class="card-body">
+                                        <h6 class="card-title fw-bold">@proizvod.Naziv</h6>
+                                        <p class="card-text text-muted small">@proizvod.Opis</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="fw-bold text-primary">@proizvod.Cijena.ToString("C")</span>
+                                            @if (proizvod.Dostupan)
+                                            {
+                                                <span class="badge bg-success">Dostupan</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-secondary">Nije dostupan</span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    @if (Model.Proizvodi.Count > 6)
+                    {
+                        <div class="text-center mt-3">
+                            <small class="text-muted">i još @(Model.Proizvodi.Count - 6) proizvoda...</small>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<style>
+    .breadcrumb {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 1rem;
+    }
+
+    .breadcrumb-item a {
+        color: #0d6efd;
+        transition: all 0.3s ease;
+    }
+
+    .breadcrumb-item a:hover {
+        color: #0b5ed7;
+        text-decoration: underline !important;
+    }
+
+    .card {
+        transition: all 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    @media (max-width: 768px) {
+        .display-5 {
+            font-size: 2rem;
+        }
+    }
+</style>

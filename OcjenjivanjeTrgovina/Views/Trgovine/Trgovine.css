@@ -1,0 +1,638 @@
+/* ============================================================================
+   TRGOVINE.CSS - Store/Shop Views Specific Styles
+   ============================================================================
+   
+   This file contains styles specific to the Trgovine (Store) views:
+   - Index.cshtml (Store Listing)
+   - Details.cshtml (Store Details Page)
+   - Create.cshtml (Create Store Form)
+   
+   Should be imported after common.css for proper cascade
+   ============================================================================ */
+
+/* ============================================================================
+   INDEX VIEW - STORE LISTING PAGE STYLES
+   ============================================================================ */
+
+/* Store Cards Grid Container */
+#tradeStoresGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Individual Store Card */
+.trade-store-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.trade-store-card.hidden {
+    display: none !important;
+}
+
+/* Store Card Container */
+.trade-store-card .card {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.trade-store-card .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Store Details Section */
+.store-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.store-details p {
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.store-details i {
+    font-size: 1.1rem;
+    min-width: 24px;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.store-details a {
+    color: #0d6efd;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.store-details a:hover {
+    color: #0b5ed7;
+    text-decoration: underline;
+}
+
+/* Store Card Stats Section */
+.stat-item {
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-item h6 {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+    color: #0d6efd;
+}
+
+.stat-item small {
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+/* Card Footer with Action Buttons */
+.trade-store-card .card-footer {
+    margin-top: auto;
+    display: grid;
+    gap: 0.5rem;
+    background-color: #f8f9fa;
+}
+
+.trade-store-card .btn-outline-secondary:hover,
+.trade-store-card .btn-outline-danger:hover {
+    color: white;
+}
+
+/* Rating Display */
+.text-warning {
+    color: #ffc107 !important;
+}
+
+/* Badge in Store Card */
+.trade-store-card .badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: #198754;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* ============================================================================
+   SEARCH & FILTER SECTION
+   ============================================================================ */
+
+.input-group-lg {
+    margin-bottom: 1rem;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border: 0;
+    border-right: 1px solid #dee2e6;
+}
+
+.input-group .form-control {
+    border-left: 0;
+}
+
+/* Form Select Styling */
+.form-select-lg {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+}
+
+/* ============================================================================
+   DETAILS VIEW - STORE DETAILS PAGE
+   ============================================================================ */
+
+/* Breadcrumb Navigation */
+.breadcrumb {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-item.active {
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.breadcrumb-item a {
+    color: #0d6efd;
+    transition: all 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+    color: #0b5ed7;
+    text-decoration: underline !important;
+}
+
+/* Header Information */
+.display-5 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/* Basic Information Labels */
+h6.text-uppercase {
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+/* Statistics Cards */
+.card .card-body {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.card h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #0d6efd;
+}
+
+.card p {
+    margin: 0;
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+
+/* Rating Section */
+.text-warning {
+    font-size: 2rem;
+    color: #ffc107 !important;
+}
+
+.progress {
+    height: 1.5rem;
+    background-color: #e9ecef;
+    border-radius: 8px;
+}
+
+.progress-bar {
+    background-color: #ffc107;
+    transition: width 0.5s ease;
+}
+
+/* Sidebar Action Buttons */
+.d-grid {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.btn.btn-outline-secondary,
+.btn.btn-warning,
+.btn.btn-danger {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* Quick Stats Definition List */
+dl {
+    margin-bottom: 0;
+}
+
+dl dt {
+    font-weight: 500;
+    color: #6c757d;
+}
+
+dl dd {
+    color: #2c3e50;
+}
+
+/* ============================================================================
+   CREATE VIEW - CREATE STORE FORM
+   ============================================================================ */
+
+/* Form Layout */
+.card {
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Form Groups */
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+/* Form Labels with Icons */
+.form-label {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Form Controls */
+.form-control,
+.form-select {
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+    background-color: #ffffff;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.form-control-lg {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+}
+
+/* Validation Error Messages */
+.text-danger {
+    color: #dc3545 !important;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Form Help Text */
+.form-text {
+    color: #6c757d;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Datalist for City Suggestions */
+datalist {
+    display: none;
+}
+
+/* Validation Alert */
+.alert-dismissible {
+    display: none;
+    padding-right: 3.5rem;
+}
+
+.alert-dismissible.show {
+    display: block;
+}
+
+/* Form Actions */
+.d-grid.gap-2 {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.btn-primary.btn-lg {
+    background-color: #0d6efd;
+    color: white;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary.btn-lg:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+}
+
+.btn-outline-secondary.btn-lg {
+    border: 2px solid #6c757d;
+    color: #6c757d;
+    background-color: transparent;
+}
+
+.btn-outline-secondary.btn-lg:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* ============================================================================
+   SHARED COMPONENTS ACROSS VIEWS
+   ============================================================================ */
+
+/* Page Header */
+.display-4 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+/* Icon Styling */
+.bi {
+    margin-right: 0.5rem;
+    vertical-align: -0.125em;
+}
+
+.text-primary .bi {
+    color: #0d6efd;
+}
+
+.text-success .bi {
+    color: #198754;
+}
+
+.text-danger .bi {
+    color: #dc3545;
+}
+
+.text-warning .bi {
+    color: #ffc107;
+}
+
+.text-info .bi {
+    color: #0dcaf0;
+}
+
+/* Info Alert Box */
+.alert-info {
+    background-color: rgba(13, 202, 240, 0.1);
+    border-radius: 12px;
+    padding: 1.25rem;
+    color: #0c5460;
+}
+
+/* Empty State */
+.alert-info {
+    text-align: center;
+}
+
+.alert-info i {
+    display: inline-block;
+    margin-right: 0;
+}
+
+.alert-info h4 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+/* Large Devices (xl) */
+@media (min-width: 1200px) {
+    #tradeStoresGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Medium Devices (lg) */
+@media (max-width: 991px) {
+    #tradeStoresGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .display-4 {
+        font-size: 2.5rem;
+    }
+    
+    .display-5 {
+        font-size: 2rem;
+    }
+}
+
+/* Tablets (md) */
+@media (max-width: 768px) {
+    #tradeStoresGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .display-5 {
+        font-size: 1.75rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .btn-lg {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .col-md-6 {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    h6.text-uppercase {
+        font-size: 0.7rem;
+    }
+}
+
+/* Small Devices (sm) */
+@media (max-width: 576px) {
+    #tradeStoresGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .display-4 {
+        font-size: 1.75rem;
+    }
+    
+    .display-5 {
+        font-size: 1.5rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .row > div {
+        margin-bottom: 0.5rem;
+    }
+    
+    .breadcrumb {
+        padding: 0.75rem;
+    }
+    
+    .card-body {
+        padding: 0.75rem;
+    }
+    
+    .input-group-lg {
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-control-lg,
+    .form-select-lg {
+        font-size: 0.95rem;
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .trade-store-card .badge {
+        top: 0.5rem;
+        right: 0.5rem;
+        font-size: 0.75rem;
+        padding: 0.3rem 0.5rem;
+    }
+}
+
+/* Extra Small Devices (xs) */
+@media (max-width: 360px) {
+    .display-4 {
+        font-size: 1.5rem;
+    }
+    
+    .display-5 {
+        font-size: 1.25rem;
+    }
+    
+    h6 {
+        font-size: 0.85rem;
+    }
+    
+    .card {
+        border-radius: 8px;
+    }
+}
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.trade-store-card {
+    animation: slideInUp 0.3s ease-out;
+}
+
+/* Smooth transitions for visibility changes */
+.trade-store-card.hidden {
+    animation: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+/* ============================================================================
+   UTILITY CLASSES
+   ============================================================================ */
+
+.transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.shadow-sm {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.position-absolute {
+    position: absolute;
+}

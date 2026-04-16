@@ -1,0 +1,135 @@
+@model OcjenjivanjeTrgovina.Models.Kategorija
+
+@{
+    ViewData["Title"] = $"{Model?.Naziv} - Detalji";
+}
+
+<div class="container-fluid py-5">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Home")" class="text-decoration-none">
+                    <i class="bi bi-house"></i> Početna
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Kategorije")" class="text-decoration-none">
+                    <i class="bi bi-tags"></i> Kategorije
+                </a>
+            </li>
+            <li class="breadcrumb-item active">@Model?.Naziv</li>
+        </ol>
+    </nav>
+
+    @if (Model == null)
+    {
+        <div class="alert alert-warning text-center py-5">
+            <i class="bi bi-exclamation-triangle" style="font-size: 2rem;"></i>
+            <h4 class="mt-3">Kategorija nije pronađena</h4>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
+                    <div class="card-body p-5">
+                        <div class="d-flex align-items-center mb-4">
+                            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #198754, #0dcaf0); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                                <i class="bi bi-tags"></i>
+                            </div>
+                            <div class="ms-4">
+                                <h1 class="display-5 fw-bold mb-0">
+                                    @Model.Naziv
+                                </h1>
+                                <p class="text-muted">Kategorija ID: @Model.Id</p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <h5 class="fw-bold mb-3">
+                            <i class="bi bi-info-circle"></i> Opis
+                        </h5>
+                        <p class="fs-5">@Model.Opis</p>
+
+                        <hr>
+
+                        <div>
+                            <h5 class="fw-bold mb-3">
+                                <i class="bi bi-box"></i> Proizvodi u Kategoriji
+                            </h5>
+
+                            @if (Model.Proizvodi != null && Model.Proizvodi.Any())
+                            {
+                                <p class="text-muted small">Ukupno proizvoda: @Model.Proizvodi.Count</p>
+                                <div class="list-group">
+                                    @foreach (var proizvod in Model.Proizvodi)
+                                    {
+                                        <div class="list-group-item">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h6 class="mb-1 fw-bold">@proizvod.Naziv</h6>
+                                                    <p class="mb-0 small text-muted">@proizvod.Opis</p>
+                                                </div>
+                                                <div class="text-end">
+                                                    <p class="mb-0 fw-bold text-primary">@proizvod.Cijena.ToString("F2")€</p>
+                                                    @if (proizvod.Dostupan)
+                                                    {
+                                                        <span class="badge bg-success">Dostupan</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-danger">Nije dostupno</span>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-info">
+                                    <i class="bi bi-info-circle"></i> Nema proizvoda u ovoj kategoriji
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px; position: sticky; top: 20px;">
+                    <div class="card-body p-4">
+                        <h6 class="card-title fw-bold mb-3">Akcije</h6>
+                        <div class="d-grid gap-2">
+                            <a href="@Url.Action("Index", "Kategorije")" class="btn btn-outline-primary">
+                                <i class="bi bi-arrow-left"></i> Nazad na Kategorije
+                            </a>
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary">
+                                <i class="bi bi-house"></i> Početna
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm border-0" style="border-radius: 12px;">
+                    <div class="card-body p-4">
+                        <h6 class="card-title fw-bold mb-3">
+                            <i class="bi bi-clipboard-data"></i> Statistika
+                        </h6>
+                        <ul class="list-unstyled small">
+                            <li class="mb-2">
+                                <strong>ID Kategorije:</strong> @Model.Id
+                            </li>
+                            <li class="mb-2">
+                                <strong>Broj Proizvoda:</strong> @(Model.Proizvodi?.Count ?? 0)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

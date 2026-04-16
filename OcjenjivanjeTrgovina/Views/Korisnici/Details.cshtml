@@ -1,0 +1,136 @@
+@model OcjenjivanjeTrgovina.Models.Korisnik
+
+@{
+    ViewData["Title"] = $"{Model?.Ime} {Model?.Prezime} - Profil";
+}
+
+<div class="container-fluid py-5">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Home")" class="text-decoration-none">
+                    <i class="bi bi-house"></i> Početna
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Korisnici")" class="text-decoration-none">
+                    <i class="bi bi-people"></i> Korisnici
+                </a>
+            </li>
+            <li class="breadcrumb-item active">@Model?.Ime @Model?.Prezime</li>
+        </ol>
+    </nav>
+
+    @if (Model == null)
+    {
+        <div class="alert alert-warning text-center py-5">
+            <i class="bi bi-exclamation-triangle" style="font-size: 2rem;"></i>
+            <h4 class="mt-3">Korisnik nije pronađen</h4>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
+                    <div class="card-body p-5">
+                        <div class="d-flex align-items-center mb-4">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #0d6efd, #0dcaf0); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                                <i class="bi bi-person-fill"></i>
+                            </div>
+                            <div class="ms-4">
+                                <h1 class="display-5 fw-bold mb-0">
+                                    @Model.Ime @Model.Prezime
+                                </h1>
+                                <p class="text-muted">Korisnik ID: @Model.Id</p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <h5 class="fw-bold mb-4">
+                            <i class="bi bi-info-circle"></i> Informacije
+                        </h5>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <strong class="d-block text-muted small mb-1">Ime:</strong>
+                                <p>@Model.Ime</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong class="d-block text-muted small mb-1">Prezime:</strong>
+                                <p>@Model.Prezime</p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <strong class="d-block text-muted small mb-1">Email:</strong>
+                                <p><a href="mailto:@Model.Email">@Model.Email</a></p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong class="d-block text-muted small mb-1">Telefon:</strong>
+                                <p><a href="tel:@Model.Telefon">@Model.Telefon</a></p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong class="d-block text-muted small mb-1">Datum Registracije:</strong>
+                                <p>@Model.DatumRegistracije.ToString("d.M.yyyy")</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong class="d-block text-muted small mb-1">Godina Aktivnosti:</strong>
+                                <p>@(DateTime.Now.Year - Model.DatumRegistracije.Year) godina(e)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @if (Model.Ocjene != null && Model.Ocjene.Any())
+                {
+                    <div class="card shadow-sm border-0" style="border-radius: 12px;">
+                        <div class="card-body p-5">
+                            <h5 class="card-title fw-bold mb-4">
+                                <i class="bi bi-star"></i> Ocjene Korisnika
+                            </h5>
+                            <p class="text-muted">Ukupno ocjena: @Model.Ocjene.Count</p>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px; position: sticky; top: 20px;">
+                    <div class="card-body p-4">
+                        <h6 class="card-title fw-bold mb-3">Akcije</h6>
+                        <div class="d-grid gap-2">
+                            <a href="@Url.Action("Index", "Korisnici")" class="btn btn-outline-primary">
+                                <i class="bi bi-arrow-left"></i> Nazad na Korisnike
+                            </a>
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary">
+                                <i class="bi bi-house"></i> Početna
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm border-0" style="border-radius: 12px;">
+                    <div class="card-body p-4">
+                        <h6 class="card-title fw-bold mb-3">
+                            <i class="bi bi-clipboard-data"></i> Statistika
+                        </h6>
+                        <ul class="list-unstyled small">
+                            <li class="mb-2">
+                                <strong>Broj Ocjena:</strong> @(Model.Ocjene?.Count ?? 0)
+                            </li>
+                            <li class="mb-2">
+                                <strong>Broj Kupnji:</strong> @(Model.Kupnje?.Count ?? 0)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

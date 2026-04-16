@@ -1,0 +1,117 @@
+@{
+    ViewData["Title"] = "O Aplikaciji";
+}
+
+<div class="container-fluid py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "Home")" class="text-decoration-none">
+                            <i class="bi bi-house"></i> Početna
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active">O Aplikaciji</li>
+                </ol>
+            </nav>
+
+            <!-- Header -->
+            <h1 class="display-5 fw-bold mb-4">
+                <i class="bi bi-info-circle text-primary"></i> O Aplikaciji
+            </h1>
+
+            <!-- Content Card -->
+            <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
+                <div class="card-body p-5">
+                    <h5 class="card-title fw-bold mb-3">Ocjenjivanja Trgovina</h5>
+                    <p class="card-text">
+                        Ocjenjivanja Trgovina je sveobuhvatna aplikacija za prikaz, analizu i ocjenjivanje online trgovina. 
+                        Aplikacija omogućava korisnicima da pregledavaju trgovine, proizvode, kupnje, i ocjene na jednom mjestu.
+                    </p>
+
+                    <h6 class="fw-bold mt-4 mb-3">Glavne Karakteristike:</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle text-success"></i> 
+                            <strong>Pregledavanje Trgovina:</strong> Kompletna baza dostupnih trgovina sa svim relevantnim informacijama
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle text-success"></i> 
+                            <strong>Katalog Proizvoda:</strong> Pregled proizvoda podijeljenih u različitim kategorijama
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle text-success"></i> 
+                            <strong>Analiza Kupnji:</strong> Detaljan pregled svih kupnji sa stavkama i iznosima
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle text-success"></i> 
+                            <strong>Ocjene Korisnika:</strong> Pregledavanje mišljenja i ocjena registriranih korisnika
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle text-success"></i> 
+                            <strong>Profili Korisnika:</strong> Detaljne informacije o svakom registriranom korisniku
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-check-circle text-success"></i> 
+                            <strong>Navigacija:</strong> Intuitivna navigacija između svih entiteta
+                        </li>
+                    </ul>
+
+                    <hr class="my-4">
+
+                    <h6 class="fw-bold mb-3">Tehnologije:</h6>
+                    <p class="card-text">
+                        Aplikacija je razvijena koristeći moderne web tehnologije:
+                    </p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-gear text-primary"></i> <strong>ASP.NET Core MVC:</strong> Backend okruženje</li>
+                        <li class="mb-2"><i class="bi bi-palette text-info"></i> <strong>Bootstrap 5:</strong> Responsive dizajn</li>
+                        <li class="mb-2"><i class="bi bi-boxes text-success"></i> <strong>C#:</strong> Backend logika</li>
+                        <li class="mb-2"><i class="bi bi-window text-danger"></i> <strong>Razor:</strong> HTML šablonizacija</li>
+                        <li class="mb-2"><i class="bi bi-icon text-warning"></i> <strong>Bootstrap Icons:</strong> Ikone i UI elementi</li>
+                    </ul>
+
+                    <hr class="my-4">
+
+                    <h6 class="fw-bold mb-3">Struktura Podataka:</h6>
+                    <p class="card-text">
+                        Aplikacija koristi sljedeće glavne entitete:
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-shop"></i> Trgovine</li>
+                                <li class="mb-2"><i class="bi bi-box"></i> Proizvodi</li>
+                                <li class="mb-2"><i class="bi bi-tags"></i> Kategorije</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-people"></i> Korisnici</li>
+                                <li class="mb-2"><i class="bi bi-bag"></i> Kupnje</li>
+                                <li class="mb-2"><i class="bi bi-star"></i> Ocjene</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h6 class="fw-bold mb-3">Verzija:</h6>
+                    <p class="card-text">
+                        <strong>Lab 2 - HTML/Binding v1.0</strong><br>
+                        Razvojna verzija školskog projekta
+                    </p>
+                </div>
+            </div>
+
+            <!-- Back Button -->
+            <div class="d-grid gap-2">
+                <a href="@Url.Action("Index", "Home")" class="btn btn-outline-primary btn-lg">
+                    <i class="bi bi-arrow-left"></i> Nazad na Početnu
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

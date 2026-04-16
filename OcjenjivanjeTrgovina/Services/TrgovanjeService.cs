@@ -123,5 +123,94 @@ namespace OcjenjivanjeTrgovina.Services
             Console.WriteLine($"[ASYNC] Ukupan iznos: {ukupno}€");
             return ukupno;
         }
+
+        // Statička kolekcija za simulaciju baze podataka
+        private static List<Trgovina> _trgovine = new List<Trgovina>();
+
+        /// <summary>
+        /// Inicijalizacija statičke liste sa podacima
+        /// </summary>
+        public void InicijalizirajTrgovine(List<Trgovina> trgovine)
+        {
+            _trgovine = new List<Trgovina>(trgovine);
+        }
+
+        /// <summary>
+        /// Dohvata sve trgovine iz "baze" - async verzija
+        /// </summary>
+        public async Task<List<Trgovina>> DohvatiSveTrgovine()
+        {
+            Console.WriteLine("[ASYNC] Dohvaćanje svih trgovina...");
+            await Task.Delay(500);
+            return new List<Trgovina>(_trgovine);
+        }
+
+        /// <summary>
+        /// Dohvata specifičnu trgovinu po ID - async verzija
+        /// </summary>
+        public async Task<Trgovina> DohvatiTrgovinu(int id)
+        {
+            Console.WriteLine($"[ASYNC] Dohvaćanje trgovine sa ID: {id}...");
+            await Task.Delay(300);
+            return _trgovine.FirstOrDefault(t => t.Id == id);
+        }
+
+        /// <summary>
+        /// Kreira novu trgovinu - async verzija
+        /// </summary>
+        public async Task<Trgovina> KreirajTrgovinu(Trgovina trgovina)
+        {
+            Console.WriteLine($"[ASYNC] Kreiranje nove trgovine: {trgovina.Naziv}...");
+            await Task.Delay(1000);
+            
+            // Postavi ID kao najveći ID + 1
+            int noviId = _trgovine.Any() ? _trgovine.Max(t => t.Id) + 1 : 1;
+            trgovina.Id = noviId;
+            
+            _trgovine.Add(trgovina);
+            
+            Console.WriteLine($"[ASYNC] Trgovina {trgovina.Naziv} je kreirana sa ID: {noviId}");
+            return trgovina;
+        }
+
+        /// <summary>
+        /// Ažurira stalnu trgovinu - async verzija
+        /// </summary>
+        public async Task<bool> AzurirajTrgovinu(Trgovina trgovina)
+        {
+            Console.WriteLine($"[ASYNC] Ažuriranje trgovine: {trgovina.Naziv}...");
+            await Task.Delay(800);
+            
+            var postojeca = _trgovine.FirstOrDefault(t => t.Id == trgovina.Id);
+            if (postojeca == null)
+                return false;
+            
+            postojeca.Naziv = trgovina.Naziv;
+            postojeca.Adresa = trgovina.Adresa;
+            postojeca.Grad = trgovina.Grad;
+            postojeca.Telefon = trgovina.Telefon;
+            postojeca.Email = trgovina.Email;
+            
+            Console.WriteLine($"[ASYNC] Trgovina {trgovina.Naziv} je ažurirana");
+            return true;
+        }
+
+        /// <summary>
+        /// Briše trgovinu - async verzija
+        /// </summary>
+        public async Task<bool> BrisiTrgovinu(int id)
+        {
+            Console.WriteLine($"[ASYNC] Brisanje trgovine sa ID: {id}...");
+            await Task.Delay(700);
+            
+            var trgovina = _trgovine.FirstOrDefault(t => t.Id == id);
+            if (trgovina == null)
+                return false;
+            
+            _trgovine.Remove(trgovina);
+            
+            Console.WriteLine($"[ASYNC] Trgovina sa ID: {id} je obrisana");
+            return true;
+        }
     }
 }

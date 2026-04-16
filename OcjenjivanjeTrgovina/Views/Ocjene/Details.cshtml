@@ -1,0 +1,115 @@
+@model OcjenjivanjeTrgovina.Models.Ocjena
+
+@{
+    ViewData["Title"] = "Ocjena - Detalji";
+}
+
+<div class="container-fluid py-5">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Home")" class="text-decoration-none">
+                    <i class="bi bi-house"></i> Početna
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Ocjene")" class="text-decoration-none">
+                    <i class="bi bi-star"></i> Ocjene
+                </a>
+            </li>
+            <li class="breadcrumb-item active">Ocjena #@Model?.Id</li>
+        </ol>
+    </nav>
+
+    @if (Model == null)
+    {
+        <div class="alert alert-warning text-center py-5">
+            <i class="bi bi-exclamation-triangle" style="font-size: 2rem;"></i>
+            <h4 class="mt-3">Ocjena nije pronađena</h4>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
+                    <div class="card-body p-5">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h1 class="display-5 fw-bold mb-0">
+                                <i class="bi bi-star text-warning"></i> Ocjena #@Model.Id
+                            </h1>
+                            <span class="badge bg-warning" style="font-size: 1.2rem;">
+                                @for(int i = 0; i < Model.Vrijednost; i++) {
+                                    <i class="bi bi-star-fill"></i>
+                                }
+                            </span>
+                        </div>
+
+                        <hr>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <strong class="d-block text-muted mb-1">Trgovina ID:</strong>
+                                <p class="fs-5">@Model.TrgovinaId</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong class="d-block text-muted mb-1">Korisnik ID:</strong>
+                                <p class="fs-5">@Model.KorisnikId</p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <strong class="d-block text-muted mb-1">Vrijednost Ocjene:</strong>
+                                <p class="fs-5 text-warning fw-bold">@Model.Vrijednost / 5</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong class="d-block text-muted mb-1">Vrsta Ocjene:</strong>
+                                <p class="fs-5">@Model.VrstaOcjene</p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <strong class="d-block text-muted mb-2">Komentar:</strong>
+                        <p class="fs-5">@Model.Komentar</p>
+
+                        <hr>
+
+                        <strong class="d-block text-muted mb-1">Datum Ocjene:</strong>
+                        <p>@Model.DatumOcjene.ToString("d.M.yyyy HH:mm")</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px; position: sticky; top: 20px;">
+                    <div class="card-body p-4">
+                        <h6 class="card-title fw-bold mb-3">Akcije</h6>
+                        <div class="d-grid gap-2">
+                            <a href="@Url.Action("Index", "Ocjene")" class="btn btn-outline-primary">
+                                <i class="bi bi-arrow-left"></i> Nazad na Ocjene
+                            </a>
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary">
+                                <i class="bi bi-house"></i> Početna
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm border-0" style="border-radius: 12px;">
+                    <div class="card-body p-4">
+                        <h6 class="card-title fw-bold mb-3">
+                            <i class="bi bi-star-fill text-warning"></i> Kvaliteta
+                        </h6>
+                        <div class="progress" style="height: 24px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: @(Model.Vrijednost * 20)%;" aria-valuenow="@Model.Vrijednost" aria-valuemin="0" aria-valuemax="5">
+                                @Model.Vrijednost / 5
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
